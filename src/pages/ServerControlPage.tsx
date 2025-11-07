@@ -4107,11 +4107,11 @@ const ServerControlPage: React.FC = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
-                className="cyber-card max-w-lg w-full max-h-[90vh] overflow-hidden flex flex-col">
-                <div className="flex items-center justify-between mb-4 flex-shrink-0">
+                className="cyber-card max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col">
+                <div className="flex items-center justify-between mb-3 flex-shrink-0">
                   <div className="flex items-center gap-2">
                     <Cpu className="w-5 h-5 text-purple-400" />
-                    <h3 className="text-xl font-semibold text-cyber-text">
+                    <h3 className="text-lg font-semibold text-cyber-text">
                       硬件更换申请
                     </h3>
                   </div>
@@ -4122,62 +4122,64 @@ const ServerControlPage: React.FC = () => {
                       setHardwareReplaceComment('');
                       setHardwareReplaceDetails('');
                     }}
-                    className="p-2 hover:bg-cyber-grid/50 rounded-lg transition-colors text-cyber-muted hover:text-cyber-text">
+                    className="p-1.5 hover:bg-cyber-grid/50 rounded-lg transition-colors text-cyber-muted hover:text-cyber-text">
                     <X className="w-5 h-5" />
                   </button>
                 </div>
 
-                <p className="text-cyber-muted text-sm mb-4 flex-shrink-0">
+                <p className="text-cyber-muted text-xs mb-3 flex-shrink-0">
                   为 {selectedServer?.name} 提交硬件更换申请
                 </p>
 
                 <div className="overflow-y-auto flex-1 min-h-0 pr-2">
                   {!hardwareReplaceType ? (
                     /* 硬件类型选择界面 */
-                    <div className="space-y-3">
-                      <p className="text-cyber-text font-medium mb-3">请选择要更换的硬件类型：</p>
+                    <div>
+                      <p className="text-cyber-text text-sm font-medium mb-3">请选择要更换的硬件类型：</p>
                       
-                      <button
-                        onClick={() => setHardwareReplaceType('hardDiskDrive')}
-                        className="w-full p-4 bg-red-500/10 border-2 border-red-500/30 rounded-lg text-left hover:bg-red-500/20 hover:border-red-500/50 transition-all group">
-                        <div className="flex items-center gap-3">
-                          <HardDrive className="w-6 h-6 text-red-400" />
-                          <div>
-                            <h4 className="text-lg font-semibold text-red-400 group-hover:text-red-300">硬盘驱动器</h4>
-                            <p className="text-sm text-cyber-muted mt-1">申请更换故障或损坏的硬盘</p>
+                      <div className="grid grid-cols-3 gap-3 mb-3">
+                        <button
+                          onClick={() => setHardwareReplaceType('hardDiskDrive')}
+                          className="p-4 bg-red-500/5 border border-red-500/30 rounded-lg hover:bg-red-500/10 hover:border-red-500/50 transition-all">
+                          <div className="flex flex-col items-center text-center gap-2">
+                            <HardDrive className="w-8 h-8 text-red-400" />
+                            <div>
+                              <h4 className="text-sm font-semibold text-red-400 mb-1">硬盘驱动器</h4>
+                              <p className="text-xs text-cyber-muted">故障或损坏的硬盘</p>
+                            </div>
                           </div>
-                        </div>
-                      </button>
+                        </button>
 
-                    <button
-                      onClick={() => setHardwareReplaceType('memory')}
-                      className="w-full p-4 bg-orange-500/10 border-2 border-orange-500/30 rounded-lg text-left hover:bg-orange-500/20 hover:border-orange-500/50 transition-all group">
-                      <div className="flex items-center gap-3">
-                        <Cpu className="w-6 h-6 text-orange-400" />
-                        <div>
-                          <h4 className="text-lg font-semibold text-orange-400 group-hover:text-orange-300">内存（RAM）</h4>
-                          <p className="text-sm text-cyber-muted mt-1">申请更换故障的内存模块</p>
-                        </div>
+                        <button
+                          onClick={() => setHardwareReplaceType('memory')}
+                          className="p-4 bg-orange-500/5 border border-orange-500/30 rounded-lg hover:bg-orange-500/10 hover:border-orange-500/50 transition-all">
+                          <div className="flex flex-col items-center text-center gap-2">
+                            <Cpu className="w-8 h-8 text-orange-400" />
+                            <div>
+                              <h4 className="text-sm font-semibold text-orange-400 mb-1">内存（RAM）</h4>
+                              <p className="text-xs text-cyber-muted">故障的内存模块</p>
+                            </div>
+                          </div>
+                        </button>
+
+                        <button
+                          onClick={() => setHardwareReplaceType('cooling')}
+                          className="p-4 bg-blue-500/5 border border-blue-500/30 rounded-lg hover:bg-blue-500/10 hover:border-blue-500/50 transition-all">
+                          <div className="flex flex-col items-center text-center gap-2">
+                            <Activity className="w-8 h-8 text-blue-400" />
+                            <div>
+                              <h4 className="text-sm font-semibold text-blue-400 mb-1">散热系统</h4>
+                              <p className="text-xs text-cyber-muted">风扇或散热器</p>
+                            </div>
+                          </div>
+                        </button>
                       </div>
-                    </button>
 
-                    <button
-                      onClick={() => setHardwareReplaceType('cooling')}
-                      className="w-full p-4 bg-blue-500/10 border-2 border-blue-500/30 rounded-lg text-left hover:bg-blue-500/20 hover:border-blue-500/50 transition-all group">
-                      <div className="flex items-center gap-3">
-                        <Activity className="w-6 h-6 text-blue-400" />
-                        <div>
-                          <h4 className="text-lg font-semibold text-blue-400 group-hover:text-blue-300">散热系统</h4>
-                          <p className="text-sm text-cyber-muted mt-1">申请更换风扇或散热器</p>
-                        </div>
-                      </div>
-                    </button>
-
-                    <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 mt-4">
+                    <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-3">
                       <div className="flex items-start gap-2">
-                        <AlertCircle className="w-5 h-5 text-purple-400 flex-shrink-0 mt-0.5" />
-                        <div className="text-sm text-purple-300">
-                          <p className="font-semibold mb-1">提示：</p>
+                        <AlertCircle className="w-4 h-4 text-purple-400 flex-shrink-0 mt-0.5" />
+                        <div className="text-xs text-purple-300">
+                          <p className="font-semibold mb-0.5">提示：</p>
                           <p>选择硬件类型后，您需要填写详细的故障信息以便OVH技术团队处理。</p>
                         </div>
                       </div>
@@ -4263,17 +4265,17 @@ const ServerControlPage: React.FC = () => {
                     </div>
 
                     {/* 提交按钮 */}
-                    <div className="flex justify-end gap-3 mt-6">
+                    <div className="flex justify-end gap-3 mt-4">
                       <button
                         onClick={() => setHardwareReplaceType('')}
                         disabled={isProcessing}
-                        className="px-6 py-2.5 border border-cyber-accent/30 rounded-md text-cyber-text hover:bg-cyber-accent/5 transition-colors disabled:opacity-50">
+                        className="px-4 py-2 border border-cyber-accent/30 rounded-md text-sm text-cyber-text hover:bg-cyber-accent/5 transition-colors disabled:opacity-50">
                         返回
                       </button>
                       <button
                         onClick={handleHardwareReplace}
                         disabled={isProcessing}
-                        className="px-6 py-2.5 border border-cyber-accent/30 rounded-md text-cyber-text hover:bg-cyber-accent/5 transition-colors disabled:opacity-50 flex items-center gap-2">
+                        className="px-4 py-2 border border-cyber-accent/30 rounded-md text-sm text-cyber-text hover:bg-cyber-accent/5 transition-colors disabled:opacity-50 flex items-center gap-2">
                         {isProcessing && <RefreshCw className="w-4 h-4 animate-spin" />}
                         提交申请
                       </button>
