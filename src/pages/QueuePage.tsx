@@ -54,7 +54,7 @@ const QueuePage = () => {
   const { isAuthenticated } = useAPI();
   const [queueItems, setQueueItems] = useState<QueueItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [showAddForm, setShowAddForm] = useState(false); // 默认收起表单
+  const [showAddForm, setShowAddForm] = useState(true); // 默认展开表单
   const [servers, setServers] = useState<ServerPlan[]>([]);
   const [planCodeInput, setPlanCodeInput] = useState<string>("");
   const [selectedServer, setSelectedServer] = useState<ServerPlan | null>(null);
@@ -139,7 +139,6 @@ const QueuePage = () => {
 
     if (successCount > 0 || errorCount === 0) {
       fetchQueueItems();
-      setShowAddForm(false);
       setPlanCodeInput("");
       setSelectedDatacenters([]);
       setRetryInterval(TASK_RETRY_INTERVAL);
@@ -307,25 +306,12 @@ const QueuePage = () => {
             {isMobile && '清空'}
           </button>
         </div>
-        <button
-          onClick={() => setShowAddForm(!showAddForm)}
-          className="cyber-button text-xs flex items-center bg-cyber-primary hover:bg-cyber-primary-dark text-white justify-center"
-        >
-          <PlusIcon size={14} className="mr-1" />
-          添加新任务
-        </button>
       </div>
 
       {/* Add Form */}
       {showAddForm && (
-        <div className="bg-cyber-surface-dark p-4 sm:p-6 rounded-lg shadow-xl border border-cyber-border relative">
-          <button 
-            onClick={() => setShowAddForm(false)} 
-            className="absolute top-2 right-2 sm:top-3 sm:right-3 text-cyber-muted hover:text-cyber-text transition-colors"
-          >
-            <XIcon size={isMobile ? 18 : 20} />
-          </button>
-          <h2 className={`${isMobile ? 'text-lg' : 'text-xl'} font-semibold mb-4 sm:mb-6 text-cyber-primary-accent pr-8`}>添加抢购任务</h2>
+        <div className="bg-cyber-surface-dark p-4 sm:p-6 rounded-lg shadow-xl border border-cyber-border">
+          <h2 className={`${isMobile ? 'text-lg' : 'text-xl'} font-semibold mb-4 sm:mb-6 text-cyber-primary-accent`}>添加抢购任务</h2>
           
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 mb-4 sm:mb-6">
             {/* Left Column: Plan Code, Quantity & Retry Interval */}
